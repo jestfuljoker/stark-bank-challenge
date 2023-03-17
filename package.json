@@ -6,6 +6,7 @@
   "scripts": {
     "prepare": "husky install",
     "build": "bash scripts/build.sh",
+    "invoke:local": "bash scripts/invoke-local.sh",
     "test": "jest --passWithNoTests --silent --noStackTrace",
     "test:debug": "jest --passWithNoTests",
     "test:unit": "pnpm test -- --watch --testMatch='**/*.spec.ts'",
@@ -33,5 +34,8 @@
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "starkbank": "^2.16.0"
   }
 }

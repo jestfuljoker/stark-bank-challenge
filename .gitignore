@@ -1,3 +1,5 @@
 node_modules
 __compiled__
+__zip__
 coverage
+logfile.txt
