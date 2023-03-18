@@ -11,7 +11,8 @@
     "test:debug": "jest --passWithNoTests",
     "test:unit": "pnpm test -- --watch --testMatch='**/*.spec.ts'",
     "test:staged": "pnpm test -- --findRelatedTests",
-    "test:ci": "pnpm test -- --coverage"
+    "test:ci": "pnpm test -- --coverage",
+    "tf:deploy": "bash scripts/deploy.sh"
   },
   "keywords": [],
   "author": "Christofer Assis <chris.f.assis18@gmail.com>",
@@ -33,9 +34,11 @@
     "jest": "^29.5.0",
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "@aws-sdk/client-secrets-manager": "^3.294.0"
   },
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "starkbank": "^2.16.0"
   }
 }
