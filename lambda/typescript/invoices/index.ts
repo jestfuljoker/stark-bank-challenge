@@ -1,39 +1,57 @@
 import { Callback, Context } from 'aws-lambda';
-import starkbank from 'starkbank';
+import { invoice } from 'starkbank';
+import { configClient, getPemContent } from '../../utils';
+import { createInvoices } from './helpers';
 
-export async function handler(event: unknown, _: Context, callback: Callback) {
-	const user = new starkbank.Project({
-		environment: 'sandbox',
-		id: '6361128644902912',
-		privateKey: `-----BEGIN EC PARAMETERS-----
-BgUrgQQACg==
------END EC PARAMETERS-----
------BEGIN EC PRIVATE KEY-----
-MHQCAQEEIJi2iGFS8XKWGKE8qR0JuN0RwHvWtxwR+Ykt+TgkDIIvoAcGBSuBBAAK
-oUQDQgAEOYLZGLfqOl6NWg+qXXtKjbbKNIGl9WvnyHHoYC3OPsc0gA2OIVIim8bt
-M4Yv4fykMD1rdIIDI0isjHGHcg9fYA==
------END EC PRIVATE KEY-----
+type Result = {
+	error: string | null;
+	data: unknown;
+};
 
-`,
-	});
+export async function handler(
+	event: unknown,
+	_: Context,
+	callback: Callback,
+): Promise<void> {
+	let result: Result = {
+		error: null,
+		data: null,
+	};
 
-	const invoices = await starkbank.invoice.create(
-		[
-			new starkbank.Invoice({
-				amount: 100,
-				name: 'Test Invoice',
-				taxId: '618.116.440-58',
-			}),
-		],
-		{
+	try {
+		const privateKey = await getPemContent();
+
+		const user = configClient(privateKey);
+
+		const invoices = await invoice.create(createInvoices(), {
 			user,
-		},
-	);
+		});
 
-	console.log(JSON.stringify(invoices, null, 4));
+		if (!invoices.every((invoice) => !!invoice)) {
+			throw new Error('INTERNAL_ERROR');
+		}
 
-	callback(null, {
-		status: 200,
-		body: JSON.stringify({ ola: 'mundo' }),
-	});
+		result = {
+			...result,
+			data: {
+				statusCode: 200,
+				body: true,
+			},
+		};
+	} catch (error) {
+		console.log('ERROR:', error);
+
+		result = {
+			error: 'INTERNAL_ERROR',
+			data: {
+				statusCode: 500,
+				body: JSON.stringify({
+					error: true,
+					message: 'An internal error occurred to generate invoices',
+				}),
+			},
+		};
+	}
+
+	callback(result.error, result.data);
 }
