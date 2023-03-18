@@ -1,0 +1,43 @@
+{
+  "event": {
+    "created": "2023-03-18T22:42:30.430765+00:00",
+    "id": "6013302081585152",
+    "log": {
+      "created": "2023-03-18T22:40:35.089217+00:00",
+      "errors": [],
+      "id": "4887548404957184",
+      "invoice": {
+        "amount": 70,
+        "brcode": "00020101021226890014br.gov.bcb.pix2567brcode-h.sandbox.starkinfra.com/v2/3a48cec684164e549dfb81c494f496865204000053039865802BR5925Stark Bank S.A. - Institu6009Sao Paulo62070503***630405B8",
+        "created": "2023-03-18T22:37:35.754772+00:00",
+        "descriptions": [],
+        "discountAmount": 0,
+        "discounts": [],
+        "due": "2023-03-20T22:37:35.735136+00:00",
+        "expiration": 5097600,
+        "fee": 0,
+        "fine": 2.0,
+        "fineAmount": 0,
+        "id": "5226513498636288",
+        "interest": 1.0,
+        "interestAmount": 0,
+        "link": "https://challenge857283.sandbox.starkbank.com/invoicelink/3a48cec684164e549dfb81c494f49686",
+        "name": "Jeanette Shields",
+        "nominalAmount": 70,
+        "pdf": "https://sandbox.api.starkbank.com/v2/invoice/3a48cec684164e549dfb81c494f49686.pdf",
+        "status": "paid",
+        "tags": [
+          "e19495266202303182240oclrhvrmryw"
+        ],
+        "taxId": "174.217.545-71",
+        "transactionIds": [
+          "26893393902657524045820688451700"
+        ],
+        "updated": "2023-03-18T22:40:35.089270+00:00"
+      },
+      "type": "credited"
+    },
+    "subscription": "invoice",
+    "workspaceId": "6504092268494848"
+  }
+}
