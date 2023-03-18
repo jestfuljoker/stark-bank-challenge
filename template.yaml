@@ -6,6 +6,8 @@ Globals:
     Environment:
       Variables:
         NODE_OPTIONS: '--enable-source-maps'
+        REGION: 'us-east-1'
+        PROJECT_ID: '6361128644902912'
 
 Resources:
   invoices:
