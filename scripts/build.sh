@@ -13,6 +13,7 @@ for functionPath in ./lambda/typescript/*; do
     --minify \
     --sourcemap \
     --external:@types/* \
+    --external:@aws-sdk/* \
     --external:aws-lambda \
     --outfile=./lambda/__compiled__/"$functionName"/index.js
 done
