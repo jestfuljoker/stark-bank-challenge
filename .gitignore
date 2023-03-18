@@ -3,3 +3,5 @@ __compiled__
 __zip__
 coverage
 logfile.txt
+.terraform
+.terraform.lock.hcl
