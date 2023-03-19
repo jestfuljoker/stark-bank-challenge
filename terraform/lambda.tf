@@ -12,6 +12,7 @@ resource "aws_lambda_function" "invoices" {
   handler          = "index.handler"
   runtime          = "nodejs18.x"
   timeout          = 10
+  layers           = [aws_lambda_layer_version.lambda_deps.arn]
 
   environment {
     variables = {
@@ -34,7 +35,7 @@ resource "aws_lambda_function" "transfers" {
   role             = aws_iam_role.invoke_lambda.arn
   handler          = "index.handler"
   runtime          = "nodejs18.x"
-  timeout          = 10
+  layers           = [aws_lambda_layer_version.lambda_deps.arn]
 
   environment {
     variables = {

@@ -13,6 +13,8 @@ for functionPath in ./lambda/typescript/*; do
     --minify \
     --sourcemap \
     --external:@types/* \
+    --external:@faker-js/faker \
+    --external:starkbank \
     --external:@aws-sdk/* \
     --external:aws-lambda \
     --outfile=./lambda/__compiled__/"$functionName"/index.js

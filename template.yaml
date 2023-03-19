@@ -18,3 +18,12 @@ Resources:
       CodeUri: lambda/__compiled__/invoices
       MemorySize: 512
       Timeout: 60
+
+  transfers:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs18.x
+      CodeUri: lambda/__compiled__/transfers
+      MemorySize: 512
+      Timeout: 60
