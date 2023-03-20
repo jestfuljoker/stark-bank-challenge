@@ -5,4 +5,5 @@ module.exports = {
 	transform: {
 		'^.+\\.ts?$': '@swc/jest',
 	},
+	setupFiles: ['<rootDir>/.jest/setEnvVars.ts'],
 };
