@@ -1,10 +1,15 @@
 import { Project } from 'starkbank';
 
-export function configClient(privateKey: string): Project {
+export function configClient(
+	privateKey: string,
+	environment = 'sandbox',
+): Project {
 	const user = new Project({
 		id: process.env.PROJECT_ID as string,
-		environment: 'sandbox',
+		environment,
 		privateKey: privateKey,
+		allowedIps: undefined,
+		name: 'Christofer sandbox',
 	});
 
 	return user;
