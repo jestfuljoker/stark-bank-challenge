@@ -26,4 +26,15 @@ describe('createInvoices helper function', () => {
 			expect(typeof invoice.name).toBe('string');
 		}
 	});
+
+	it('should create an array of invoices with valid customer taxId', () => {
+		const invoices = createInvoices();
+
+		for (const invoice of invoices) {
+			expect(invoice.taxId).toBeDefined();
+			expect(invoice.taxId).not.toBeNull();
+			expect(typeof invoice.taxId).toBe('string');
+			expect(invoice.taxId.length).toBe(11);
+		}
+	});
 });
