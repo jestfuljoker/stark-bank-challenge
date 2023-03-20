@@ -34,7 +34,10 @@ async function createTransfer(body: string): Promise<void> {
 			});
 
 			if (createdTransfer.length > 0) {
-				console.log('Transfer made successfully!!!\nPayload:', createTransfer);
+				console.log(
+					'Transfer made successfully!!!\nPayload:',
+					JSON.stringify(createdTransfer, null, 4),
+				);
 			}
 		}
 	}

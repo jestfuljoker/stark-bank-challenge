@@ -31,6 +31,8 @@ export async function handler(
 			throw new Error('INTERNAL_ERROR');
 		}
 
+		console.log('Created invoices:', invoices.length);
+
 		result = {
 			...result,
 			data: {
