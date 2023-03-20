@@ -16,4 +16,20 @@ describe('Invoices Lambda', () => {
 			body: true,
 		});
 	});
+
+	it('should return 500 if invoices has an invalid id', async () => {
+		jest
+			.spyOn(starkbank.invoice, 'create')
+			.mockResolvedValue([{ id: '' }] as starkbank.Invoice[]);
+
+		await handler({}, {} as Context, mockCallback);
+
+		expect(mockCallback).toHaveBeenCalledWith('INTERNAL_ERROR', {
+			statusCode: 500,
+			body: JSON.stringify({
+				error: true,
+				message: 'An internal error occurred to generate invoices',
+			}),
+		});
+	});
 });

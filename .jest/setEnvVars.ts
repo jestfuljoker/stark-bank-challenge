@@ -1,4 +1,5 @@
-process.env.PROJECT_ID = '5656565656565656';
+process.env.PROJECT_ID = '6361128644902912';
+process.env.REGION = 'us-east-1';
 // This is a fake privatePemKey value
 process.env.PRIVATE_PEM = `
 -----BEGIN EC PARAMETERS-----
