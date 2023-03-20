@@ -9,8 +9,8 @@ type Result = {
 };
 
 export async function handler(
-	event: unknown,
-	_: Context,
+	_: unknown,
+	__: Context,
 	callback: Callback,
 ): Promise<void> {
 	let result: Result = {
