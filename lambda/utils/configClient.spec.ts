@@ -1,17 +1,33 @@
 import { Project } from 'starkbank';
 import { configClient } from './configClient';
 
+let privateKey: string;
+
+type ReturnedProject = {
+	allowedIps: [];
+	environment: string;
+	name: string;
+	id: string;
+	pem: string;
+};
+
+function makeExpectedProject(): ReturnedProject {
+	return {
+		allowedIps: [],
+		pem: privateKey,
+		environment: 'sandbox',
+		name: 'Christofer sandbox',
+		id: process.env.PROJECT_ID as string,
+	};
+}
+
 describe('configClient Utils', () => {
-	const privateKey = process.env.PRIVATE_PEM as string;
+	beforeEach(() => {
+		privateKey = process.env.PRIVATE_PEM as string;
+	});
 
 	it('should return a Project instance with correct attributes', () => {
-		const expectedProject = {
-			environment: 'sandbox',
-			pem: privateKey,
-			id: process.env.PROJECT_ID,
-			name: 'Christofer sandbox',
-			allowedIps: [],
-		};
+		const expectedProject = makeExpectedProject();
 
 		const result = configClient(privateKey);
 
