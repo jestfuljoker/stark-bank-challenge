@@ -16,4 +16,14 @@ describe('createInvoices helper function', () => {
 			expect(invoice.amount).toBeLessThanOrEqual(2000);
 		}
 	});
+
+	it('should create an array of invoices with valid customer name', () => {
+		const invoices = createInvoices();
+
+		for (const invoice of invoices) {
+			expect(invoice.name).toBeDefined();
+			expect(invoice.name).not.toBeNull();
+			expect(typeof invoice.name).toBe('string');
+		}
+	});
 });
