@@ -34,4 +34,16 @@ describe('configClient Utils', () => {
 		expect(result).toBeInstanceOf(Project);
 		expect(result).toMatchObject(expectedProject);
 	});
+
+	it('should throws an Exception if environment is invalid', () => {
+		try {
+			configClient(privateKey, '');
+		} catch (error) {
+			expect(error).toStrictEqual(
+				new Error(
+					'Invalid environment, please choose among production,sandbox',
+				),
+			);
+		}
+	});
 });
