@@ -27,7 +27,7 @@ export async function handler(
 			user,
 		});
 
-		if (!invoices.every((invoice) => !!invoice)) {
+		if (!invoices.every((invoice) => !!invoice.id)) {
 			throw new Error('INTERNAL_ERROR');
 		}
 
