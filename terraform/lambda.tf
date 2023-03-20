@@ -1,3 +1,12 @@
+
+resource "aws_lambda_permission" "invoices_cron" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.invoices.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.invoices_cron.arn
+}
+
+
 data "archive_file" "invoices_lambda_zip" {
   type        = "zip"
   source_dir  = "../lambda/__compiled__/invoices"
