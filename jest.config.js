@@ -3,6 +3,7 @@ module.exports = {
 	collectCoverageFrom: ['<rootDir>/lambda/**/*.ts', '!**/*.d.ts'],
 	coverageDirectory: 'coverage',
 	clearMocks: true,
+	maxWorkers: 4,
 	transform: {
 		'^.+\\.ts?$': '@swc/jest',
 	},
