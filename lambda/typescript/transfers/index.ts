@@ -51,7 +51,7 @@ export async function handler(
 		error: null,
 		data: {
 			statusCode: 200,
-			body: false,
+			body: true,
 		},
 	};
 
