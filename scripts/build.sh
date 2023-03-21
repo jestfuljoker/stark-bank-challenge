@@ -7,7 +7,7 @@ set -e
 for functionPath in ./lambda/typescript/*; do
   functionName=$(basename "$functionPath")
 
-  esbuild "$functionPath"/index.ts \
+  pnpx esbuild "$functionPath"/index.ts \
     --platform=node \
     --bundle \
     --minify \

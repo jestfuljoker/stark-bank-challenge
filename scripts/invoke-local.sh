@@ -25,7 +25,7 @@ if [ ! -f "$FILE_PATH" ]; then
 fi
 
 if [ -f "lambda/typescript/$FUNCTION_NAME/index.ts" ]; then
-  esbuild \
+  pnpx esbuild \
     lambda/typescript/"$FUNCTION_NAME"/index.ts \
     --platform=node \
     --bundle \
