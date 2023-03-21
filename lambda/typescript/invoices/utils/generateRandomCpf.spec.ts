@@ -7,4 +7,10 @@ describe('generateRandomCpf utils function', () => {
 
 		expect(cpf).toMatch(regex);
 	});
+	it('should generate different CPF numbers on multiple runs', () => {
+		const cpf1 = generateRandomCpf();
+		const cpf2 = generateRandomCpf();
+
+		expect(cpf1).not.toBe(cpf2);
+	});
 });
