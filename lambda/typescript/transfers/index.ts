@@ -3,15 +3,17 @@ import { Transfer, transfer } from 'starkbank';
 import { configClient, getPemContent } from '../../utils';
 import { InvoiceEvent } from './types';
 
+type Result = {
+	error: string | null;
+	data: unknown;
+};
+
 async function createTransfer(body: string): Promise<void> {
 	const {
 		event: { log },
 	} = JSON.parse(body) as InvoiceEvent;
 
 	if (log?.invoice && log.type === 'credited') {
-		console.log('TYPE:', log.type);
-		console.log('INVOICE STATUS:', log.invoice.status);
-
 		const { status, amount } = log.invoice;
 
 		if (status === 'paid') {
@@ -33,11 +35,8 @@ async function createTransfer(body: string): Promise<void> {
 				user,
 			});
 
-			if (createdTransfer.length > 0) {
-				console.log(
-					'Transfer made successfully!!!\nPayload:',
-					JSON.stringify(createdTransfer, null, 4),
-				);
+			if (!createdTransfer.every((transfer) => !!transfer.id)) {
+				throw new Error('INTERNAL_ERROR');
 			}
 		}
 	}
@@ -48,7 +47,13 @@ export async function handler(
 	__: Context,
 	callback: Callback,
 ): Promise<void> {
-	console.log('EVENT: ', JSON.stringify(event, null, 4));
+	let result: Result = {
+		error: null,
+		data: {
+			statusCode: 200,
+			body: false,
+		},
+	};
 
 	try {
 		if (event.body) {
@@ -56,10 +61,18 @@ export async function handler(
 		}
 	} catch (error) {
 		console.error('ERROR: ', error);
+
+		result = {
+			error: (error as Error).message,
+			data: {
+				statusCode: 500,
+				body: JSON.stringify({
+					error: true,
+					message: 'An internal error occurred to generate transfers',
+				}),
+			},
+		};
 	}
 
-	callback(null, {
-		statusCode: 200,
-		body: false,
-	});
+	callback(result.error, result.data);
 }
